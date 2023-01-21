@@ -14,6 +14,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final debugImageSrc = "https://picsum.photos/1280/960";
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -37,10 +38,7 @@ class _LoginPageState extends State<LoginPage> {
             child: SizedBox(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              child: Image.asset(
-                'assets/images/background1.jpg',
-                fit: BoxFit.fill,
-              ),
+              child: Image.network(debugImageSrc),
             ),
           ),
           Container(
