@@ -10,8 +10,8 @@ class ProfilePage extends ConsumerWidget {
     return Center(
         child: value.when(
       data: (data) {
-        return ListView(
-            children: data.map((user) => ProfileWidget(user: user)).toList());
+        final userList = data.map((user) => ProfileWidget(user: user)).toList();
+        return ListView(children: userList);
       },
       loading: () => CircularProgressIndicator(),
       error: (error, _) => Text(error.toString()),
