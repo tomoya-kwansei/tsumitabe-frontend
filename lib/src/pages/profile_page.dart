@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tsumitabe_frontend/src/components/profile_page/profile_widget.dart';
 import 'package:tsumitabe_frontend/src/view_model/provider.dart';
 
 class ProfilePage extends ConsumerWidget {
@@ -9,7 +10,8 @@ class ProfilePage extends ConsumerWidget {
     return Center(
         child: value.when(
       data: (data) {
-        return Text('${data.length}');
+        return ListView(
+            children: data.map((user) => ProfileWidget(user: user)).toList());
       },
       loading: () => CircularProgressIndicator(),
       error: (error, _) => Text(error.toString()),
