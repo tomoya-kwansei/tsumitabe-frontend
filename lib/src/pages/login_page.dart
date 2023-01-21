@@ -14,7 +14,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final debugImageSrc = "https://picsum.photos/1280/960";
+    const debugImageSrc = "https://picsum.photos/1280/960";
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
