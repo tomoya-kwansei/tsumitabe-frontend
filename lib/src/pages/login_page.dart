@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tsumitabe_frontend/src/clients/authenticate_api_client.dart';
+import 'package:tsumitabe_frontend/src/clients/user_client_api.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -118,7 +119,12 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       final client = AuthenticateAPIClient();
                       final future = client.login(email, password);
-                      future.then((value) => print(value));
+                      future.then((authentication) {
+                        print(authentication.token);
+                      });
+                      future.catchError((error) {
+                        print(error);
+                      });
                     },
                     child: const Text('Login'),
                   )

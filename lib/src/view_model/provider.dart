@@ -12,5 +12,5 @@ final listProvider = FutureProvider<List<User>>((ref) async {
 
 final meProvider = FutureProvider<User>((ref) async {
   final repository = ref.read(authenticateRepository);
-  return await repository.me();
+  return await repository.me("");
 });

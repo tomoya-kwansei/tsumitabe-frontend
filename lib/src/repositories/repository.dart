@@ -11,7 +11,7 @@ class Repository {
 class AuthenticateRepository {
   final api = AuthenticateAPIClient();
 
-  dynamic me() async {
-    return await api.me();
+  dynamic me(String token) async {
+    return await api.me(token);
   }
 }
