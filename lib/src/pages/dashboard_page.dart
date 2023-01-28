@@ -1,28 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tsumitabe_frontend/src/view_model/provider.dart';
+import 'package:tsumitabe_frontend/src/common/cache.dart';
 
-import '../models/user.dart';
-
-class DashboardPage extends ConsumerWidget {
+class DashboardPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<User> user = ref.watch(dashboardProvider);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Tsumitabe App',
-          style: TextStyle(color: Colors.white),
+  _DashboardPageState createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends State<DashboardPage> {
+  int _selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    final user = CacheClass().user;
+    final tabBar = BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
         ),
-      ),
-      extendBodyBehindAppBar: true,
-      body: user.when(
-          data: (data) => SafeArea(
-                  child: Stack(
-                children: [Text(data.email)],
-              )),
-          error: (error, _) => SafeArea(child: Text("Error: $error")),
-          loading: () => SafeArea(child: CircularProgressIndicator())),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          label: 'Search',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.settings),
+          label: 'Setting',
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      onTap: _onItemTapped,
     );
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Tsumitabe App',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        extendBodyBehindAppBar: true,
+        body: SafeArea(
+            child: Stack(
+          children: [Text(user.email)],
+        )),
+        bottomNavigationBar: tabBar);
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }
