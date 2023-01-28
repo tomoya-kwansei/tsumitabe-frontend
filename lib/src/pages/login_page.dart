@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tsumitabe_frontend/src/clients/authenticate_api_client.dart';
 
 class LoginPage extends StatefulWidget {
@@ -117,9 +118,15 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       final client = AuthenticateAPIClient();
                       final future = client.login(email, password);
-                      future.then((authentication) {
-                        Navigator.of(context)
-                            .pushReplacementNamed("/dashboard");
+                      future.then((authentication) async {
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setString("token", authentication.token);
+                        return client.me(authentication.token);
+                      }).then((user) async {
+                        if (user == null) throw NullThrownError();
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setInt("user", user.id);
+                        Navigator.of(context).pushNamed("/dashboard");
                       });
                       future.catchError((error) {
                         print("Error: ${error}");
