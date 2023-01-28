@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tsumitabe_frontend/src/clients/authenticate_api_client.dart';
-import 'package:tsumitabe_frontend/src/clients/user_client_api.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tsumitabe_frontend/src/view_model/provider.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+import '../models/user.dart';
 
+class DashboardPage extends ConsumerWidget {
   @override
-  _DashboardPage createState() => _DashboardPage();
-}
-
-class _DashboardPage extends State<DashboardPage> {
-  String email = '';
-  String password = '';
-  bool hidePassword = true;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<User> user = ref.watch(dashboardProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -24,10 +16,13 @@ class _DashboardPage extends State<DashboardPage> {
         ),
       ),
       extendBodyBehindAppBar: true,
-      body: SafeArea(
-          child: Stack(
-        children: [Text("Hello, World")],
-      )),
+      body: user.when(
+          data: (data) => SafeArea(
+                  child: Stack(
+                children: [Text(data.email)],
+              )),
+          error: (error, _) => SafeArea(child: Text("Error: $error")),
+          loading: () => SafeArea(child: CircularProgressIndicator())),
     );
   }
 }
