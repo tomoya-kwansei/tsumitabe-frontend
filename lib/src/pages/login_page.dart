@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'TSUMITABE',
+          "Tsumitabe App",
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -122,6 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                       future.then((authentication) async {
                         final prefs = await SharedPreferences.getInstance();
                         prefs.setString("token", authentication.token);
+                        CacheClass().token = authentication.token;
                         return client.me(authentication.token);
                       }).then((user) async {
                         if (user == null) throw NullThrownError();
