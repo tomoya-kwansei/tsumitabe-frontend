@@ -1,12 +1,7 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:http/http.dart' as http;
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:tsumitabe_frontend/src/models/authorization_token.dart';
 import 'package:tsumitabe_frontend/src/models/user.dart';
 
@@ -18,7 +13,7 @@ class AuthenticateAPIClient {
     }
     var dio = Dio();
     final response = await dio.get('$backendUrl/api/login/',
-        options: Options(headers: {"Authorization": token}));
+        options: Options(headers: {"Authorization": "Token $token"}));
     if (response.statusCode == 200) {
       return User.fromJson(response.data as dynamic);
     } else {
