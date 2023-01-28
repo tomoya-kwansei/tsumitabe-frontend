@@ -21,9 +21,9 @@ class TsumitabeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Tsumitabe',
+        title: "Tsumitabe App",
         theme: ThemeData(
-          primarySwatch: Colors.indigo,
+          primarySwatch: Colors.brown,
         ),
         routes: <String, WidgetBuilder>{
           '/': (_) => new LoginPage(),
