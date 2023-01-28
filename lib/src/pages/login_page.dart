@@ -118,7 +118,8 @@ class _LoginPageState extends State<LoginPage> {
                       final client = AuthenticateAPIClient();
                       final future = client.login(email, password);
                       future.then((authentication) {
-                        Navigator.of(context).pushNamed("/dashboard");
+                        Navigator.of(context)
+                            .pushReplacementNamed("/dashboard");
                       });
                       future.catchError((error) {
                         print("Error: ${error}");
