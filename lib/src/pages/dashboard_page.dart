@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tsumitabe_frontend/src/common/cache.dart';
 
 class DashboardPage extends StatefulWidget {
+  const DashboardPage({Key? key}) : super(key: key);
+
   @override
   _DashboardPageState createState() => _DashboardPageState();
 }
@@ -33,7 +35,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text(
-            'Tsumitabe App',
+            "Tsumitabe App",
             style: TextStyle(color: Colors.white),
           ),
         ),

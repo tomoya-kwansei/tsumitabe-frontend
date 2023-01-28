@@ -8,4 +8,5 @@ class CacheClass {
 
   // キャッシュで保持するデータ
   late User user;
+  late String token;
 }
