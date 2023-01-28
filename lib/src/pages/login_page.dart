@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tsumitabe_frontend/src/clients/authenticate_api_client.dart';
-import 'package:tsumitabe_frontend/src/clients/user_client_api.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -19,7 +18,6 @@ class _LoginPageState extends State<LoginPage> {
     const debugImageSrc = "https://picsum.photos/1280/960";
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         title: const Text(
           'TSUMITABE',
           style: TextStyle(color: Colors.white),
@@ -120,10 +118,12 @@ class _LoginPageState extends State<LoginPage> {
                       final client = AuthenticateAPIClient();
                       final future = client.login(email, password);
                       future.then((authentication) {
-                        print(authentication.token);
+                        Navigator.of(context).pushNamed("/dashboard");
                       });
                       future.catchError((error) {
-                        print(error);
+                        print("Error: ${error}");
+                      }, test: (error) {
+                        return error is int && error >= 400;
                       });
                     },
                     child: const Text('Login'),
