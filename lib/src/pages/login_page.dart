@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tsumitabe_frontend/src/clients/authenticate_api_client.dart';
+import 'package:tsumitabe_frontend/src/common/cache.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -126,6 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                         if (user == null) throw NullThrownError();
                         final prefs = await SharedPreferences.getInstance();
                         prefs.setInt("user", user.id);
+                        CacheClass().user = user;
                         Navigator.of(context).pushNamed("/dashboard");
                       });
                       future.catchError((error) {
