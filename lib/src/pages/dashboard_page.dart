@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tsumitabe_frontend/src/common/cache.dart';
+import 'package:tsumitabe_frontend/src/components/dashboard_page/dashboard_component.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -40,10 +41,7 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ),
         extendBodyBehindAppBar: true,
-        body: SafeArea(
-            child: Stack(
-          children: [Text(user.email)],
-        )),
+        body: SafeArea(child: Container(child: DashboardComponent(user: user))),
         bottomNavigationBar: tabBar);
   }
 
