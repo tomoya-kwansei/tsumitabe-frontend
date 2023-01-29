@@ -15,8 +15,6 @@ class _FoodListComponentState extends State<FoodListComponent> {
   Widget build(BuildContext context) {
     return GridView.extent(
       maxCrossAxisExtent: 150,
-      padding: const EdgeInsets.all(6),
-      mainAxisSpacing: 4,
       children: widget.foods.map((item) => Image.network(item.url)).toList(),
     );
   }
