@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tsumitabe_frontend/src/components/dashboard_page/food_list_component.dart';
+import 'package:tsumitabe_frontend/src/components/dashboard_page/tsumitabe_chart_component.dart';
 import 'package:tsumitabe_frontend/src/models/food.dart';
 import 'package:tsumitabe_frontend/src/models/user.dart';
 
@@ -20,8 +21,12 @@ class _DashboardComponentState extends State<DashboardComponent> {
             id: index,
             name: "food No. $index",
             url: "https://picsum.photos/seed/$index/320/320"));
-    return Stack(
-      children: [FoodListComponent(foods: foods)],
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(child: TsumitabeChartComponent()),
+        Expanded(child: FoodListComponent(foods: foods))
+      ],
     );
   }
 }
