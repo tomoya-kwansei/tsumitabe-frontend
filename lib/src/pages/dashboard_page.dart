@@ -41,7 +41,7 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ),
         extendBodyBehindAppBar: true,
-        body: SafeArea(child: Container(child: DashboardComponent(user: user))),
+        body: SafeArea(child: DashboardComponent(user: user)),
         bottomNavigationBar: tabBar);
   }
 
