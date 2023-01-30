@@ -21,12 +21,17 @@ class _DashboardComponentState extends State<DashboardComponent> {
             id: index,
             name: "food No. $index",
             url: "https://picsum.photos/seed/$index/320/320"));
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(child: TsumitabeChartComponent()),
-        Expanded(child: FoodListComponent(foods: foods))
-      ],
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            height: 150,
+            child: TsumitabeChartComponent(),
+          ),
+          Expanded(child: FoodListComponent(foods: foods))
+        ],
+      ),
     );
   }
 }
