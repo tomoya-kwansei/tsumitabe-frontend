@@ -52,6 +52,7 @@ dependencies:
   shared_preferences: ^2.0.17
   fl_chart: ^0.60.0
   flutter_facebook_auth: ^5.0.7
+  flutter_login_facebook: ^1.7.0
 
 dev_dependencies:
   flutter_test:
